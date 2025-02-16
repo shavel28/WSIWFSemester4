@@ -2,7 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use illuminate\Http\Request;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RouteCheckController;
 
+/*
+ /\_/\  
+( -.- )  Zzz...
+(  >💻 )  
+*/
 
 
 //-------------------------------------------- ACARA 3 ------------------------------------------------------
@@ -99,6 +106,38 @@ Route::get('/search/{query}', function ($query) {
 
 //--------------------------------------------------- ACARA 4 --------------------------------------------------
 
+//Generate url bernama
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+
+//Memeriksa rute saat ini
+Route::get('/check-route', [RouteCheckController::class, 'checkRoute'])->name('check.route');
+
+//Middleware
+Route::get('/check-route', function () {
+    return response()->json(['message' => 'Rute berhasil diakses!']);
+})->middleware('check.route')->name('check.route');
+
+// Route dengan Middleware
+Route::get('/admin', function () {
+    return "Halaman Admin";
+})->middleware('check.role');
+
+// Route menggunakan Controller
+Route::get('/user/{id}', [UserController::class, 'show']);
+
+//Name Space
+Route::get('/user/{id}', [UserController::class, 'show']);
+
+//Subdomain route
+// Route::domain('sub.yourdomain.com')->group(function () {
+//     Route::get('/', function () {
+//         return 'Ini halaman subdomain';
+//     });
+
+//     Route::get('/dashboard', function () {
+//         return 'Dashboard subdomain';
+//     });
+// });
 
 //Route Prefixes
 Route::prefix('admin')->group(function () {
