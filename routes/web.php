@@ -5,6 +5,7 @@ use illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteCheckController;
 use App\Http\Controllers\ManagementUserController;
+use App\Http\Controllers\HomeController;
 
 /*
  /\_/\  
@@ -14,9 +15,9 @@ use App\Http\Controllers\ManagementUserController;
 
 
 //-------------------------------------------- ACARA 3 ------------------------------------------------------
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // // Route::get('/blog', function () {
 // //     $a = 2;
@@ -157,8 +158,22 @@ use App\Http\Controllers\ManagementUserController;
 
 //-------------------------------------ACARA 5-----------------------------------------------
 
-// Rute untuk menampilkan daftar user
-Route::get('/user', [ManagementUserController::class, 'index']);
+// // Rute untuk menampilkan daftar user
+// Route::get('/user', [ManagementUserController::class, 'index']);
+
+// // Rute untuk resource controller (CRUD otomatis)
+// Route::resource('user', ManagementUserController::class);
+
+// //-----------------------------------ACARA 6-------------------------------------------------------------------
+// //membuat view sederhana
+// Route::get("/home", function(){
+//     return view("home");
+// });
+
+// Route::group(['namespace' => 'Frontend'], function(){
+//     Route::resource('home', 'HomeController');
+// });
+Route::get('/home', [HomeController::class, 'index']);
 
 // Rute untuk resource controller (CRUD otomatis)
-Route::resource('user', ManagementUserController::class);
+Route::resource('/home', HomeController::class);
