@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteCheckController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Backend\DashboardController;
 
 /*
  /\_/\  
@@ -177,3 +178,6 @@ Route::get('/home', [HomeController::class, 'index']);
 
 // Rute untuk resource controller (CRUD otomatis)
 Route::resource('/home', HomeController::class);
+
+//ACARA 8
+Route::resource('dashboard', DashboardController::class);
