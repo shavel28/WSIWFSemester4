@@ -181,3 +181,6 @@ Route::resource('/home', HomeController::class);
 
 //ACARA 8
 Route::resource('dashboard', DashboardController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
