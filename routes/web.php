@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
+use App\Http\Controllers\Backend\PendidikanController;
 
 /*
  /\_/\  
@@ -194,3 +195,12 @@ Route::group(['namespace' => ''], function()
     Route::resource('pendidikan', 'PendidikanController');
     Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
 });
+
+Route::group(['namespace' => 'Backend'], function()
+{
+    Route::resource('dashboard', 'DashboardController');
+    Route::resource('pendidikan', 'PendidikanController');
+});
+
+//acara 15
+Route::resource('pendidikan', PendidikanController::class);
