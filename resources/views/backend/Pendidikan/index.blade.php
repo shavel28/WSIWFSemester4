@@ -70,13 +70,19 @@
                                             <td>{{ $item->tahun_keluar }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-warning" href="">
+                                                    <!-- Tombol Edit -->
+                                                    <a class="btn btn-warning" href="{{ route('pendidikan.edit', $item->id) }}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <form method="POST" action="">
+
+                                                    <!-- Tombol Delete -->
+                                                    <form action="{{ route('pendidikan.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">
-                                                            <i class="fa fa-trash-o"></i>
+                                                        <i class="fa fa-trash"></i> <!-- Pastikan menggunakan "fa-trash" -->
                                                         </button>
+
                                                     </form>
                                                 </div>
                                             </td>

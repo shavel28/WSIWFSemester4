@@ -40,4 +40,10 @@ public function update(Request $request, Pendidikan $pendidikan)
         ->with('success', 'Pendidikan berhasil diperbaharui.');
 }
 
+public function destroy(Pendidikan $pendidikan){
+    $pendidikan->delete();
+    return redirect()->route('pendidikan.index')
+    ->with('success','Data Pendidikan berhasil dihapus');
+}
+
 }

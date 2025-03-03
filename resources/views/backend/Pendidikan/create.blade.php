@@ -13,12 +13,13 @@
                 </ol>
             </div>
         </div>
+
         <!-- Form validations -->
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Pendidikan
+                        {{ isset($pendidikan) ? 'Mengubah' : 'Menambahkan' }} Pendidikan
                     </header>
 
                     @if ($errors->any())
@@ -35,50 +36,58 @@
                     <div class="panel-body">
                         <div class="form">
                             <form class="form-validate form-horizontal" id="pendidikan_form" method="POST"
-                                action="{{ route('pendidikan.store') }}">
+                                action="{{ isset($pendidikan) ? route('pendidikan.update', $pendidikan->id) : route('pendidikan.store') }}">
                                 @csrf
+                                @if(isset($pendidikan))
+                                    @method('PUT')
+                                @endif
+
                                 <div class="form-group">
-                                    <label for="name" class="control-label col-lg-2">Nama Sekolah
-                                        <span class="required">*</span></label>
+                                    <label for="name" class="control-label col-lg-2">Nama Sekolah <span class="required">*</span></label>
                                     <div class="col-lg-10">
                                         <input class="form-control" id="name" name="nama" minlength="5" type="text"
-                                            required />
+                                            value="{{ isset($pendidikan) ? $pendidikan->nama : '' }}" required />
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="tingkatan" class="control-label col-lg-2">Tingkatan
-                                        <span class="required">*</span></label>
+                                    <label for="tingkatan" class="control-label col-lg-2">Tingkatan <span class="required">*</span></label>
                                     <div class="col-lg-10">
                                         <select class="form-control m-bot15" name="tingkatan" id="tingkatan" required>
-                                            <option value="1">TK</option>
-                                            <option value="2">SD</option>
-                                            <option value="3">SMP</option>
-                                            <option value="4">SMA/SMK</option>
-                                            <option value="5">D3</option>
-                                            <option value="6">S1</option>
-                                            <option value="7">S2</option>
-                                            <option value="8">S3</option>
+                                            <option value="1" {{ isset($pendidikan) && $pendidikan->tingkatan == 1 ? 'selected' : '' }}>TK</option>
+                                            <option value="2" {{ isset($pendidikan) && $pendidikan->tingkatan == 2 ? 'selected' : '' }}>SD</option>
+                                            <option value="3" {{ isset($pendidikan) && $pendidikan->tingkatan == 3 ? 'selected' : '' }}>SMP</option>
+                                            <option value="4" {{ isset($pendidikan) && $pendidikan->tingkatan == 4 ? 'selected' : '' }}>SMA/SMK</option>
+                                            <option value="5" {{ isset($pendidikan) && $pendidikan->tingkatan == 5 ? 'selected' : '' }}>D3</option>
+                                            <option value="6" {{ isset($pendidikan) && $pendidikan->tingkatan == 6 ? 'selected' : '' }}>S1</option>
+                                            <option value="7" {{ isset($pendidikan) && $pendidikan->tingkatan == 7 ? 'selected' : '' }}>S2</option>
+                                            <option value="8" {{ isset($pendidikan) && $pendidikan->tingkatan == 8 ? 'selected' : '' }}>S3</option>
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="tahun_masuk" class="control-label col-lg-2">Tahun Masuk
-                                        <span class="required">*</span></label>
+                                    <label for="tahun_masuk" class="control-label col-lg-2">Tahun Masuk <span class="required">*</span></label>
                                     <div class="col-lg-10">
-                                        <input id="tahun_masuk" type="text" name="tahun_masuk" class="form-control" required>
+                                        <input id="tahun_masuk" type="text" name="tahun_masuk" class="form-control"
+                                            value="{{ isset($pendidikan) ? $pendidikan->tahun_masuk : '' }}" required>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="tahun_keluar" class="control-label col-lg-2">Tahun Selesai
-                                        <span class="required">*</span></label>
+                                    <label for="tahun_keluar" class="control-label col-lg-2">Tahun Selesai <span class="required">*</span></label>
                                     <div class="col-lg-10">
-                                        <input id="tahun_keluar" type="text" name="tahun_keluar" class="form-control" required>
+                                        <input id="tahun_keluar" type="text" name="tahun_keluar" class="form-control"
+                                            value="{{ isset($pendidikan) ? $pendidikan->tahun_keluar : '' }}" required>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button class="btn btn-primary" type="submit">Save</button>
-                                        <a href="{{ route('pendidikan.index') }}"><button class="btn btn-default" type="button">Cancel</button></a>
+                                        <a href="{{ route('pendidikan.index') }}">
+                                            <button class="btn btn-default" type="button">Cancel</button>
+                                        </a>
                                     </div>
                                 </div>
                             </form>
