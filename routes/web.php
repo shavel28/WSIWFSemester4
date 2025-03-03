@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteCheckController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\DashboardController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Backend\PengalamanKerjaController;
 
 /*
  /\_/\  
@@ -184,3 +186,11 @@ Route::resource('dashboard', DashboardController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//acara 13
+Route::group(['namespace' => ''], function()
+{
+    Route::resource('pendidikan', 'PendidikanController');
+    Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+});
