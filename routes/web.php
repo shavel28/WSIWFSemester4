@@ -204,3 +204,35 @@ Route::group(['namespace' => 'Backend'], function()
 
 //acara 15
 Route::resource('pendidikan', PendidikanController::class);
+
+//acara 17 
+//create
+use App\Http\Controllers\SessionController;
+Route::get('/session/create', [SessionController::class, 'create']);
+//show
+Route::get('/session/show', [SessionController::class, 'show']);
+//delete
+Route::get('/session/delete', [SessionController::class, 'delete']);
+//menangkap data melalui URL
+use App\Http\Controllers\PegawaiController;
+
+Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
+//menangkap data melalui inputan
+Route::get('/formulir', [PegawaiController::class, 'formulir']);
+Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+
+//acara 18
+Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+//cobaerror
+use App\Http\Controllers\CobaController;
+
+Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
+
+//acara 19
+use App\Http\Controllers\UploadController;
+
+Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
+Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
+
+Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
+Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
