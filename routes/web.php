@@ -236,3 +236,12 @@ Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name(
 
 Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
 Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
+
+//acara 20
+//acara 20 ke 1
+Route::get('/dropzone', [UploadController::class, 'dropzone']);
+Route::post('/dropzone/store', [UploadController::class, 'dropzone_store'])->name('dropzone.store');
+
+//acara 20 ke 2
+Route::get('/pdf_upload', [UploadController::class, 'pdf_upload'])->name('pdf_upload');
+Route::post('/pdf_store', [UploadController::class, 'pdf_store'])->name('pdf_store');
