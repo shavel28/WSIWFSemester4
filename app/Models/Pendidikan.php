@@ -8,7 +8,5 @@ class Pendidikan extends Model
 {
     protected $table = 'pendidikan';
     protected $primaryKey = 'id';
-    protected $fillable = [
-        'nama', 'tingkatan', 'tahun_masuk', 'tahun_keluar',
-    ];
+    protected $fillable = ['nama', 'tingkatan', 'tahun_masuk', 'tahun_keluar'];
 }
