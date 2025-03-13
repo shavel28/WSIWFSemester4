@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteCheckController;
 use App\Http\Controllers\ManagementUserController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\backend\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\backend\PengalamanKerjaController;
@@ -33,84 +33,84 @@ Route::get('/', function () {
 //     return 'hasil dari a + b = '.$c;
 // });
 
-Route::get('coba', function () {
-    return view('coba');
-});
+// Route::get('coba', function () {
+//     return view('coba');
+// });
 
-Route::view('/coba', 'coba');
+// Route::view('/coba', 'coba');
 
-Route::get('/coba', function () {
-    return view('coba', ['data' => 'saya programmer pemula']);
-});
+// Route::get('/coba', function () {
+//     return view('coba', ['data' => 'saya programmer pemula']);
+// });
 
-Route::view('/coba', 'coba', ['data' => 'saya programmer pemula']);
+// Route::view('/coba', 'coba', ['data' => 'saya programmer pemula']);
 
-// Route::get('/coba', function (){
-$profile = 'aku programmer';
-return view('coba', ['data' => $profile]);
-
-
-//route parameter
-Route::get('/coba/{id}', function ($id) {
-    return 'ini adalah ' . $id;
-});
-
-Route::get('/coba/{id}', function (Request $request) {
-    return 'ini adalah ' . $request->id;
-});
-
-//Route untuk menampilkan halaman form
-Route::get('/form', function () {
-    return view('form'); // Menampilkan form di resources/views/form.blade.php
-});
+// // Route::get('/coba', function (){
+// $profile = 'aku programmer';
+// return view('coba', ['data' => $profile]);
 
 
-// Route untuk menangani GET dan POST di /submit
-Route::match(['get', 'post'], '/submit', function (Request $request) {
-    if ($request->isMethod('get')) {
-        return redirect('/form');
-    }
-    return "Form submitted successsfully!";
-});
+// //route parameter
+// Route::get('/coba/{id}', function ($id) {
+//     return 'ini adalah ' . $id;
+// });
 
-// Redirect dari /here ke /there secara permanen (301)
-Route::redirect('/here', '/there', 301);
+// Route::get('/coba/{id}', function (Request $request) {
+//     return 'ini adalah ' . $request->id;
+// });
 
-// Route untuk /there agar bisa diakses
-Route::get('/there', function () {
-    return "Anda telah dialihkan ke halaman /there";
-});
-
-// Parameter Opsional
-Route::get('/user/{name?}', function ($name = "Guest") {
-    return "Hello, " . ucfirst($name);
-});
-
-//Regular Expression Constraints
-Route::get('user/{name}', function ($name) {
-    return "Hello, " . ucfirst($name);
-})->where('name', '[A-Za-z]+');
-Route::get('user/{id}', function ($id) {
-    return "User ID: " . $id;
-})->where('id', '[0-9]+');
-Route::get('user/{id}/{name}', function ($id, $name) {
-    return "User ID: " . $id . ", Name: " . ucfirst($name);
-})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+// //Route untuk menampilkan halaman form
+// Route::get('/form', function () {
+//     return view('form'); // Menampilkan form di resources/views/form.blade.php
+// });
 
 
-Route::get('/post/{slug}', function ($slug) {
-    return "Post: $slug";
-});
+// // Route untuk menangani GET dan POST di /submit
+// Route::match(['get', 'post'], '/submit', function (Request $request) {
+//     if ($request->isMethod('get')) {
+//         return redirect('/form');
+//     }
+//     return "Form submitted successsfully!";
+// });
 
-// Global Constraints (Tambahkan di app/Providers/RouteServiceProvider.php)
-Route::get('/post/{slug}', function ($slug) {
-    return "Post: $slug";
-});
+// // Redirect dari /here ke /there secara permanen (301)
+// Route::redirect('/here', '/there', 301);
 
-// Encoded Forward Slashes
-Route::get('/search/{query}', function ($query) {
-    return "Search query: " . urldecode($query);
-})->where('query', '.*'); // Mengizinkan / dalam parameter
+// // Route untuk /there agar bisa diakses
+// Route::get('/there', function () {
+//     return "Anda telah dialihkan ke halaman /there";
+// });
+
+// // Parameter Opsional
+// Route::get('/user/{name?}', function ($name = "Guest") {
+//     return "Hello, " . ucfirst($name);
+// });
+
+// //Regular Expression Constraints
+// Route::get('user/{name}', function ($name) {
+//     return "Hello, " . ucfirst($name);
+// })->where('name', '[A-Za-z]+');
+// Route::get('user/{id}', function ($id) {
+//     return "User ID: " . $id;
+// })->where('id', '[0-9]+');
+// Route::get('user/{id}/{name}', function ($id, $name) {
+//     return "User ID: " . $id . ", Name: " . ucfirst($name);
+// })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+
+
+// Route::get('/post/{slug}', function ($slug) {
+//     return "Post: $slug";
+// });
+
+// // Global Constraints (Tambahkan di app/Providers/RouteServiceProvider.php)
+// Route::get('/post/{slug}', function ($slug) {
+//     return "Post: $slug";
+// });
+
+// // Encoded Forward Slashes
+// Route::get('/search/{query}', function ($query) {
+//     return "Search query: " . urldecode($query);
+// })->where('query', '.*'); // Mengizinkan / dalam parameter
 
 //-------------------------------------ACARA 4-----------------------------------------------
 //Generate url bernama
@@ -186,7 +186,7 @@ Route::resource('/home', HomeController::class);
 Route::resource('dashboard', DashboardController::class);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\frontend\HomeController::class, 'index'])->name('home');
 
 //-------------------------------------ACARA 13-----------------------------------------------
 Route::group(['namespace' => ''], function () {
