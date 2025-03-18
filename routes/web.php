@@ -135,7 +135,7 @@ Route::get('/user/{id}', [UserController::class, 'show']);
 //Name Space
 Route::get('/user/{id}', [UserController::class, 'show']);
 
-//Subdomain route
+// //Subdomain route
 // Route::domain('sub.yourdomain.com')->group(function () {
 //     Route::get('/', function () {
 //         return 'Ini halaman subdomain';
@@ -188,7 +188,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\frontend\HomeController::class, 'index'])->name('home');
 
-//-------------------------------------ACARA 13-----------------------------------------------
+//-------------------------------------ACARA 13 & 14-----------------------------------------------
 Route::group(['namespace' => ''], function () {
     Route::resource('pendidikan', 'PendidikanController');
     Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
@@ -199,7 +199,7 @@ Route::group(['namespace' => 'Backend'], function () {
     Route::resource('pendidikan', 'PendidikanController');
 });
 
-//-------------------------------------ACARA 15-----------------------------------------------
+//-------------------------------------ACARA 15 & 16-----------------------------------------------
 Route::resource('pendidikan', PendidikanController::class);
 
 //-------------------------------------ACARA 17-----------------------------------------------

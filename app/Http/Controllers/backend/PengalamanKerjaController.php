@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\backend;
 
@@ -14,8 +14,8 @@ class PengalamanKerjaController extends Controller
     public function index()
     {
         // Ambil semua data pengalaman kerja
-        $pengalaman_kerja = DB::table('pengalaman_kerja')->get(); 
-        
+        $pengalaman_kerja = DB::table('pengalaman_kerja')->get();
+
         // Kirim data ke view
         return view('backend.pengalaman_kerja.index', compact('pengalaman_kerja'));
     }
@@ -39,7 +39,7 @@ class PengalamanKerjaController extends Controller
             'tahun_masuk' => $request->tahun_masuk,
             'tahun_keluar' => $request->tahun_keluar
         ]);
-        
+
         return redirect()->route('pengalaman_kerja.index')->with('success', 'Data pengalaman kerja berhasil ditambahkan.');
     }
 
@@ -48,12 +48,13 @@ class PengalamanKerjaController extends Controller
      */
     public function edit($id)
     {
-        $pengalaman_kerja = DB::table('pengalaman_kerja')->where('id', $id)->first();
-        return view('backend.pengalaman_kerja.edit', compact('pengalaman_kerja'));
+        $pengalaman = DB::table('pengalaman_kerja')->where('id', $id)->first();
+        return view('backend.pengalaman_kerja.create', compact('pengalaman'));
     }
 
+
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource sin storage.
      */
     public function update(Request $request, $id)
     {
