@@ -141,9 +141,9 @@ Route::get('/user/{id}', [UserController::class, 'show']);
 //         return 'Ini halaman subdomain';
 //     });
 
-//     Route::get('/dashboard', function () {
-//         return 'Dashboard subdomain';
-//     });
+    // Route::get('/dashboard', function () {
+    //     return 'Dashboard subdomain';
+    // });
 // });
 
 //Route Prefixes
@@ -158,6 +158,7 @@ Route::name('admin.')->group(function () {
 
     })->name('users');
 });
+
 
 //-------------------------------------ACARA 5-----------------------------------------------
 
@@ -189,15 +190,18 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\frontend\HomeController::class, 'index'])->name('home');
 
 //-------------------------------------ACARA 13 & 14-----------------------------------------------
-Route::group(['namespace' => ''], function () {
-    Route::resource('pendidikan', 'PendidikanController');
-    Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
-});
+// Route::group(['namespace' => ''], function () {
+//     Route::resource('pendidikan', 'PendidikanController');
+//     Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+// });
 
-Route::group(['namespace' => 'Backend'], function () {
-    Route::resource('dashboard', 'DashboardController');
-    Route::resource('pendidikan', 'PendidikanController');
-});
+// Route::group(['namespace' => 'Backend'], function () {
+//     Route::resource('dashboard', 'DashboardController');
+//     Route::resource('pendidikan', 'PendidikanController');
+// });
+Route::resource('pendidikan', PendidikanController::class);
+Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+Route::resource('dashboard', DashboardController::class);
 
 //-------------------------------------ACARA 15 & 16-----------------------------------------------
 Route::resource('pendidikan', PendidikanController::class);
@@ -227,7 +231,7 @@ Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
 Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
 Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
 
-Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
+Route::get('/upload1', [UploadController::class, 'upload'])->name('upload');
 Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
 
 //-------------------------------------ACARA 20-----------------------------------------------

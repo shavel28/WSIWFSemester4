@@ -107,24 +107,40 @@ class UploadController extends Controller
         return view('pdf_upload');
     }
 
-    // Menyimpan file yang diunggah
+    // Menyimpan file PDF yang di-upload
     public function pdf_store(Request $request)
     {
-        // Validasi file harus PDF dan maksimal 2MB
+        // Validasi file yang di-upload
         $request->validate([
-            'file' => 'required|mimes:pdf|max:2048',
+            'file.*' => 'required|mimes:pdf|max:10240'  // Mendukung banyak file
         ]);
 
-        // Ambil file dari request
-        $pdf = $request->file('file');
+        // Pastikan folder tujuan ada
+        $destinationPath = public_path('pdf/dropzone');
+        if (!File::isDirectory($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true, true);
+        }
 
-        // Buat nama unik berdasarkan timestamp
-        $pdfName = time() . '.' . $pdf->getClientOriginalExtension();
+        // Array untuk menyimpan nama file yang berhasil diunggah
+        $uploadedFiles = [];
 
-        // Simpan ke folder public/pdf/dropzone
-        $pdf->move(public_path('pdf/dropzone'), $pdfName);
+        // Loop untuk menangani banyak file
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $pdf) {
+                // Buat nama file unik
+                $pdfName = 'pdf_' . time() . '_' . uniqid() . '.' . $pdf->extension();
 
-        // Berikan respons JSON ke Dropzone
-        return response()->json(['success' => $pdfName]);
+                // Simpan file di folder public/pdf/dropzone
+                $pdf->move($destinationPath, $pdfName);
+
+                // Tambahkan ke daftar file yang diunggah
+                $uploadedFiles[] = $pdfName;
+            }
+
+            // Kembalikan respons JSON dengan daftar file yang berhasil di-upload
+            return response()->json(['success' => true, 'files' => $uploadedFiles]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'No files uploaded'], 400);
     }
 }
